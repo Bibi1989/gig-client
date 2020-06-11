@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+// component imports
+import { GigProvider } from "./context/GigProvider";
+import Nav from "./components/Nav/Nav";
+import Dash from "./pages/Dash";
+import GigComponent from "./pages/Gig";
+import AddGigPage from "./pages/AddGig";
+import Filter from "./components/Filter/Filter";
+
+// bootstrap style link
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GigProvider>
+      <Nav />
+      <Dash />
+      <Filter />
+      <AddGigPage />
+      <GigComponent />
+    </GigProvider>
   );
 }
 
