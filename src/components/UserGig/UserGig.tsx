@@ -4,10 +4,17 @@ import { GigContext } from "../../context/GigProvider";
 import List from "./List";
 
 const UserGig = () => {
+  const { fetchProfileGig, gig, update, delete_gig } = useContext(GigContext);
+
+  useEffect(() => {
+    fetchProfileGig();
+  }, [update, delete_gig]);
   return (
     <Container>
       <H1>Your Profile</H1>
-      <List />
+      <Grid>
+        {gig !== undefined && gig.map((g: any) => <List key={g.id} gig={g} />)}
+      </Grid>
     </Container>
   );
 };

@@ -78,11 +78,9 @@ const AddGig = () => {
     setLocation(textContent);
   };
 
-  console.log({ stack, technologies, proficiency });
-
   const onsubmit = (e: any) => {
     e.preventDefault();
-    addGig({ ...values, stack, technologies, proficiency });
+    addGig({ ...values, stack, technologies, proficiency, location });
   };
   return (
     <Wrapper>

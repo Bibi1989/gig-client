@@ -6,6 +6,9 @@ export const GigContext = createContext<any | null>(null);
 const FETCH_GIGS = "FETCH_GIGS";
 const FETCH_PROFILE = "FETCH_PROFILE";
 const ADD_GIGS = "ADD_GIGS";
+const CURRENT_GIG = "CURRENT_GIG";
+const UPDATE_GIG = "UPDATE_GIG";
+const DELETE_GIG = "DELETE_GIG";
 const SEARCH_GIG_LOCATION = "SEARCH_GIG_LOCATION";
 const SEARCH_GIG_PROF = "SEARCH_GIG_PROF";
 const SEARCH_GIG_TECH = "SEARCH_GIG_TECH";
@@ -13,7 +16,10 @@ const LOADING = "LOADING";
 
 const initialState = {
   gigs: [],
-  gig: {},
+  gig: [],
+  current: {},
+  update: {},
+  delete_gig: {},
   loading: false,
 };
 
@@ -25,6 +31,9 @@ interface IAction {
 interface IState {
   gigs: any;
   gig: any;
+  current: any;
+  update: any;
+  delete_gig: any;
   loading: boolean;
 }
 
@@ -38,7 +47,22 @@ const reducer = (state: IState, action: IAction) => {
     case FETCH_PROFILE:
       return {
         ...state,
-        gig: { ...action.payload },
+        gig: [...action.payload],
+      };
+    case CURRENT_GIG:
+      return {
+        ...state,
+        current: { ...action.payload },
+      };
+    case UPDATE_GIG:
+      return {
+        ...state,
+        update: { ...action.payload },
+      };
+    case DELETE_GIG:
+      return {
+        ...state,
+        delete_gig: { ...action.payload },
       };
     case SEARCH_GIG_PROF:
       return {
@@ -134,7 +158,6 @@ export const GigProvider = ({ children }: any) => {
     try {
       dispatch({ type: LOADING, payload: true });
       const response = await axios.get(`${URL}/profile`, AuthConfiq);
-      console.log(response.data.data);
       dispatch({ type: FETCH_PROFILE, payload: response.data.data });
       dispatch({ type: LOADING, payload: false });
     } catch (error) {
@@ -154,13 +177,44 @@ export const GigProvider = ({ children }: any) => {
       console.log(error.response);
     }
   };
+  const updateGig = async (id: number, gig: any) => {
+    try {
+      dispatch({ type: LOADING, payload: true });
+      const response = await axios.patch(`${URL}/${id}`, gig, AuthConfiq);
+      dispatch({ type: LOADING, payload: false });
+      dispatch({ type: UPDATE_GIG, payload: response.data.data });
+    } catch (error) {
+      dispatch({ type: LOADING, payload: false });
+      console.log(error.response);
+    }
+  };
+  const deleteGig = async (id: number) => {
+    try {
+      dispatch({ type: LOADING, payload: true });
+      const response = await axios.delete(`${URL}/${id}`, AuthConfiq);
+      dispatch({ type: LOADING, payload: false });
+      dispatch({ type: DELETE_GIG, payload: response.data.data });
+    } catch (error) {
+      dispatch({ type: LOADING, payload: false });
+      console.log(error.response);
+    }
+  };
+  const currentGig = (gig: any) => {
+    dispatch({ type: CURRENT_GIG, payload: gig });
+  };
   return (
     <GigContext.Provider
       value={{
         fetchGig,
         fetchProfileGig,
+        currentGig,
+        updateGig,
+        deleteGig,
         gigs: state.gigs,
         gig: state.gig,
+        current: state.current,
+        update: state.update,
+        delete_gig: state.delete_gig,
         loading: state.loading,
         addGig,
         searchGigLocation,

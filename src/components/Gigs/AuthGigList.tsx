@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Icon, Card } from "semantic-ui-react";
-import { Badge, Accordion, Button } from "react-bootstrap";
+import { Icon, Card, Accordion } from "semantic-ui-react";
+import { Badge, Button } from "react-bootstrap";
 
 import { fullName } from "../../utils/fullName";
 
@@ -24,24 +24,13 @@ const AuthGigList = ({ gig }: any) => {
           <Li key={index}>{technology}</Li>
         ))}
       </Ul>
+      <H2>Location</H2>
+      <Ul>{<Li>{gig.location ? gig.location : "No Location"}</Li>}</Ul>
     </>
   );
   const footer = (
     <FlexFooter>
-      <div>
-        <P>
-          <Icon name='browser' /> LinkedIn:{" "}
-          {gig.linkedin_url ? gig.linkedin_url : "No LinkedIn link"}
-        </P>
-        <P>
-          <Icon name='browser' /> Github:{" "}
-          {gig.github_url ? gig.github_url : "No Github link"}
-        </P>
-      </div>
-      {/* <ActionIcons>
-        <Icon name='trash' color='red' size='big' />
-        <Icon name='edit' color='teal' size='big' />
-      </ActionIcons> */}
+      <ShowContacts gig={gig} />
     </FlexFooter>
   );
   return (
@@ -98,3 +87,48 @@ const BadgeStyle = styled(Badge)`
       : bgColor === "Full" && "blue"};
   color: white;
 `;
+
+const ShowContacts = ({ gig }: any) => {
+  const [state, setState] = useState({ activeIndex: 1 });
+
+  const handleClick = (e: any, titleProps: any) => {
+    const { index } = titleProps;
+    const { activeIndex } = state;
+    const newIndex = activeIndex === index ? -1 : index;
+
+    setState({ activeIndex: newIndex });
+  };
+  const { activeIndex } = state;
+  return (
+    <Accordion styled style={{ width: "100%" }}>
+      <Accordion.Title
+        active={activeIndex === 0}
+        index={0}
+        onClick={handleClick}
+      >
+        <Icon name='dropdown' />
+        Click To See Gig Contacts
+      </Accordion.Title>
+      <Accordion.Content active={activeIndex === 0}>
+        <div>
+          <P>
+            <Icon name='phone' /> Phone Number:{" "}
+            {gig.phone ? gig.phone : "No Phone Number"}
+          </P>
+          <P>
+            <Icon name='envelope' /> Email Address:{" "}
+            {gig.email ? gig.email : "No Email Address"}
+          </P>
+          <P>
+            <Icon name='browser' /> LinkedIn:{" "}
+            {gig.linkedin_url ? gig.linkedin_url : "No LinkedIn link"}
+          </P>
+          <P>
+            <Icon name='browser' /> Github:{" "}
+            {gig.github_url ? gig.github_url : "No Github link"}
+          </P>
+        </div>
+      </Accordion.Content>
+    </Accordion>
+  );
+};

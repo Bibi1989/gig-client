@@ -4,12 +4,20 @@ import { fullName } from "../../utils/fullName";
 import { Icon, Card } from "semantic-ui-react";
 import { Badge } from "react-bootstrap";
 import { GigContext } from "../../context/GigProvider";
+import ModifyComponent from "./ModifyComponent";
 
-const List = () => {
-  const { fetchProfileGig, gig } = useContext(GigContext);
-  useEffect(() => {
-    fetchProfileGig();
-  }, []);
+const List = ({ gig }: any) => {
+  const { fetchProfileGig, currentGig, deleteGig, current } = useContext(
+    GigContext
+  );
+
+  const handlePop = (gig: any) => {
+    currentGig(gig);
+  };
+
+  const handleDelete = (id: number) => {
+    deleteGig(Number(id));
+  };
 
   const { technologies, stack } = gig;
   const header = (
@@ -46,8 +54,18 @@ const List = () => {
         </P>
       </div>
       <ActionIcons>
-        <Icon name='trash' color='red' size='big' />
-        <Icon name='edit' color='teal' size='big' />
+        <Icon
+          name='trash'
+          color='red'
+          size='big'
+          onClick={() => handleDelete(gig.id)}
+        />
+        <Icon
+          name='edit'
+          color='teal'
+          size='big'
+          onClick={() => handlePop(gig)}
+        />
       </ActionIcons>
     </FlexFooter>
   );
@@ -58,6 +76,8 @@ const List = () => {
         <Card.Content description={descriptions} />
         <Card.Content>{footer}</Card.Content>
       </CardStyle>
+
+      <ModifyComponent gig={current} />
     </Grid>
   );
 };
