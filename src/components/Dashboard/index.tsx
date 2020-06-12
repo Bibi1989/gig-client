@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { FormGroup, Form, Button } from "react-bootstrap";
 import { Icon } from "semantic-ui-react";
@@ -9,8 +9,14 @@ import { IForm } from "../../utils/IForm";
 const background_image = "./assets/background1.jpg";
 
 const Dashboard = () => {
-  const { searchGigLocation } = useContext(GigContext);
+  const { searchGigLocation, fetchGig, gigs } = useContext(GigContext);
   const [search, setSearch] = useState<string | undefined>("");
+
+  useEffect(() => {
+    fetchGig();
+
+    console.log("Render");
+  }, [search, setSearch]);
 
   const handleInput = ({ target: { value } }: IForm) => {
     searchGigLocation(value);
@@ -23,11 +29,11 @@ const Dashboard = () => {
     <div>
       <Container>
         <LandingStyle>
-          <Form onSubmit={onsubmit}>
+          <FormStyle onSubmit={onsubmit}>
             <FormGroupStyle>
               <Input
                 type='search'
-                placeholder='Search for gig base on location or proficiency'
+                placeholder='Search for gig base on location'
                 onChange={handleInput}
               />
               <IconStyle name='search' color='orange' />
@@ -35,7 +41,18 @@ const Dashboard = () => {
             <ButtonStyle type='submit' variant='info'>
               Search
             </ButtonStyle>
-          </Form>
+            {search && (
+              <Overlay show={false}>
+                <Ul>
+                  {gigs.map((gig: any) => (
+                    <Li>
+                      {gig.proficiency}, {gig.location}
+                    </Li>
+                  ))}
+                </Ul>
+              </Overlay>
+            )}
+          </FormStyle>
         </LandingStyle>
       </Container>
     </div>
@@ -46,6 +63,18 @@ export default Dashboard;
 
 const Container = styled.div`
   width: 100%;
+`;
+const FormStyle = styled.form`
+  position: relative;
+`;
+const Overlay = styled.div<{ show: boolean }>`
+  position: absolute;
+  top: 3.2em;
+  left: 0;
+  right: 0;
+  max-height: 30vh;
+  overflow-y: auto;
+  display: ${(props) => (props.show ? "block" : "none")};
 `;
 const LandingStyle = styled.div`
   min-height: 70vh;
@@ -79,4 +108,13 @@ const ButtonStyle = styled(Button)`
   border: none;
   border-radius: 0.25em;
   margin: auto;
+`;
+const Ul = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+const Li = styled.li`
+  padding: 1em;
+  margin-bottom: 0.2em;
+  background: white;
 `;
