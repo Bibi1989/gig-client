@@ -62,8 +62,8 @@ const reducer = (state: IState, action: any) => {
   }
 };
 
-const URL = "https://gig-api.herokuapp.com/api/v1/gig";
-// const URL = "http://localhost:5005/api/v1/gig";
+// const URL = "https://gig-api.herokuapp.com/api/v1/gig";
+const URL = "http://localhost:5005/api/v1/gig";
 
 export const GigProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -71,9 +71,7 @@ export const GigProvider = ({ children }: any) => {
   const searchGigLocation = async (text: string) => {
     try {
       dispatch({ type: LOADING, payload: true });
-      const response = await axios.get(
-        `http://localhost:5005/api/v1/gig/search?location=${text}`
-      );
+      const response = await axios.get(`${URL}/search?location=${text}`);
       dispatch({ type: LOADING, payload: false });
       dispatch({ type: SEARCH_GIG_LOCATION, payload: response.data.data });
     } catch (error) {
@@ -84,9 +82,7 @@ export const GigProvider = ({ children }: any) => {
   const searchGigProficiency = async (text: string) => {
     try {
       dispatch({ type: LOADING, payload: true });
-      const response = await axios.get(
-        `http://localhost:5005/api/v1/gig/search?proficiency=${text}`
-      );
+      const response = await axios.get(`${URL}/search?proficiency=${text}`);
       dispatch({ type: LOADING, payload: false });
       dispatch({ type: SEARCH_GIG_PROF, payload: response.data.data });
     } catch (error) {
@@ -97,9 +93,7 @@ export const GigProvider = ({ children }: any) => {
   const searchGigTech = async (text: string) => {
     dispatch({ type: LOADING, payload: true });
     try {
-      const response = await axios.get(
-        `http://localhost:5005/api/v1/gig/search?tech=${text}`
-      );
+      const response = await axios.get(`${URL}/search?tech=${text}`);
       dispatch({ type: LOADING, payload: false });
       dispatch({ type: SEARCH_GIG_TECH, payload: response.data.data });
     } catch (error) {

@@ -14,27 +14,27 @@ const newstate = states.map((state) => {
 });
 
 const stacks = [
-  { value: "frontend", text: "Front End" },
-  { value: "backend", text: "Back End" },
-  { value: "fullstack", text: "Full Stack" },
+  { value: "Front End", text: "Front End" },
+  { value: "Back End", text: "Back End" },
+  { value: "Full Stack", text: "Full Stack" },
 ];
 const techs = [
-  { value: "javascript", text: "Javascript" },
-  { value: "typescript", text: "Typescript" },
-  { value: "java", text: "Java" },
-  { value: "c#", text: "C#" },
-  { value: "node", text: "Node" },
-  { value: "react", text: "React" },
-  { value: "vue", text: "Vue" },
-  { value: "angular", text: "Angular" },
-  { value: "php", text: "PHP" },
-  { value: "android", text: "Android" },
-  { value: "python", text: "Python" },
+  { value: "Javascript", text: "Javascript" },
+  { value: "Typescript", text: "Typescript" },
+  { value: "Java", text: "Java" },
+  { value: "C Sharp", text: "C Sharp" },
+  { value: "Node", text: "Node" },
+  { value: "Reactjs", text: "Reactjs" },
+  { value: "Vuejs", text: "Vuejs" },
+  { value: "Angular", text: "Angular" },
+  { value: "PHP", text: "PHP" },
+  { value: "Android", text: "Android" },
+  { value: "Python", text: "Python" },
 ];
 const profs = [
-  { value: "junior", text: "Junior Level" },
-  { value: "mid", text: "Mid Level" },
-  { value: "senior", text: "Senior Level" },
+  { value: "Junior Level", text: "Junior Level" },
+  { value: "Mid Level", text: "Mid Level" },
+  { value: "Senior Level", text: "Senior Level" },
 ];
 
 const AddGig = () => {
@@ -66,13 +66,13 @@ const AddGig = () => {
     });
   };
   const handleInputStack = ({ target: { textContent } }: IForm3) => {
-    setStack(textContent.split(" ")[0].toLowerCase());
+    setStack(textContent);
   };
   const handleInputTech = ({ target: { textContent } }: IForm3) => {
-    setTech([...technologies, textContent.toLowerCase()]);
+    setTech([...technologies, textContent]);
   };
   const handleInputProf = ({ target: { textContent } }: IForm3) => {
-    setProf(textContent.split(" ")[0].toLowerCase());
+    setProf(textContent);
   };
   const handleInputLocation = ({ target: { textContent } }: IForm3) => {
     setLocation(textContent);
@@ -142,13 +142,6 @@ const AddGig = () => {
                     name='password'
                     onChange={handleInput}
                   />
-                  {/* <Form.Input
-                    fluid
-                    label='Location'
-                    placeholder='Location'
-                    name='location'
-                    onChange={handleInput}
-                  /> */}
                   <Form.Field
                     control={Select}
                     label='Location'

@@ -7,6 +7,7 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Navs = () => {
   return (
@@ -22,8 +23,12 @@ const Navs = () => {
             <NavDropdown.Divider />
             <NavDropdown.Item>Separated link</NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link>Home</Nav.Link>
-          <Nav.Link>Link</Nav.Link>
+          <Nav.Link>
+            <Link to='/login'>Login</Link>
+          </Nav.Link>
+          <Nav.Link>
+            <Link to='/register'>Register</Link>
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
