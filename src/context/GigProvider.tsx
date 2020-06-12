@@ -4,6 +4,7 @@ import axios from "axios";
 export const GigContext = createContext<any | null>(null);
 
 const FETCH_GIGS = "FETCH_GIGS";
+const FETCH_PROFILE = "FETCH_PROFILE";
 const ADD_GIGS = "ADD_GIGS";
 const SEARCH_GIG_LOCATION = "SEARCH_GIG_LOCATION";
 const SEARCH_GIG_PROF = "SEARCH_GIG_PROF";
@@ -12,24 +13,32 @@ const LOADING = "LOADING";
 
 const initialState = {
   gigs: [],
+  gig: {},
   loading: false,
 };
 
 interface IAction {
-  FETCH_GIGS: string;
+  type: string;
+  payload: any;
 }
 
 interface IState {
-  gigs: any[];
+  gigs: any;
+  gig: any;
   loading: boolean;
 }
 
-const reducer = (state: IState, action: any) => {
+const reducer = (state: IState, action: IAction) => {
   switch (action.type) {
     case FETCH_GIGS:
       return {
         ...state,
         gigs: [...action.payload],
+      };
+    case FETCH_PROFILE:
+      return {
+        ...state,
+        gig: { ...action.payload },
       };
     case SEARCH_GIG_PROF:
       return {
@@ -62,8 +71,15 @@ const reducer = (state: IState, action: any) => {
   }
 };
 
-// const URL = "https://gig-api.herokuapp.com/api/v1/gig";
-const URL = "http://localhost:5005/api/v1/gig";
+const URL = "https://gig-api.herokuapp.com/api/v1/gig";
+// const URL = "http://localhost:5005/api/v1/gig";
+
+const AuthConfiq = {
+  headers: {
+    "Content-Type": "application/json",
+    auth: sessionStorage.getItem("gig_token"),
+  },
+};
 
 export const GigProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -114,14 +130,23 @@ export const GigProvider = ({ children }: any) => {
     }
   };
 
+  const fetchProfileGig = async () => {
+    try {
+      dispatch({ type: LOADING, payload: true });
+      const response = await axios.get(`${URL}/profile`, AuthConfiq);
+      console.log(response.data.data);
+      dispatch({ type: FETCH_PROFILE, payload: response.data.data });
+      dispatch({ type: LOADING, payload: false });
+    } catch (error) {
+      dispatch({ type: LOADING, payload: false });
+      console.log(error.response);
+    }
+  };
+
   const addGig = async (gig: any) => {
     try {
       dispatch({ type: LOADING, payload: true });
-      const response = await axios.post(`${URL}`, gig, {
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
+      const response = await axios.post(`${URL}`, gig, AuthConfiq);
       dispatch({ type: LOADING, payload: false });
       dispatch({ type: ADD_GIGS, payload: response.data.data });
     } catch (error) {
@@ -133,7 +158,9 @@ export const GigProvider = ({ children }: any) => {
     <GigContext.Provider
       value={{
         fetchGig,
+        fetchProfileGig,
         gigs: state.gigs,
+        gig: state.gig,
         loading: state.loading,
         addGig,
         searchGigLocation,

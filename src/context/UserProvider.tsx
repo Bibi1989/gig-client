@@ -70,8 +70,8 @@ const reducer = (state: IState, action: IAction) => {
   }
 };
 
-// const URL = "https://gig-api.herokuapp.com/api/v1/gig";
-const URL = "http://localhost:5005/auth/v1";
+const URL = "https://gig-api.herokuapp.com/auth/v1";
+// const URL = "http://localhost:5005/auth/v1";
 
 const AuthConfiq = {
   headers: {

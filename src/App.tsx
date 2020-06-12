@@ -15,6 +15,8 @@ import RegisterComponent from "./pages/RegisterComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { UserProvider } from "./context/UserProvider";
 import PrivateRoute from "./PrivateRoute";
+import UnAuthDash from "./pages/UnAuthDash";
+import UserGig from "./components/UserGig/UserGig";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Nav />
           <Switch>
             <PrivateRoute path='/' exact component={Dash} />
+            <PrivateRoute path='/profile' exact component={UserGig} />
+            <Route path='/home' exact component={UnAuthDash} />
             <Route path='/login' exact component={LoginComponent} />
             <Route path='/register' exact component={RegisterComponent} />
           </Switch>

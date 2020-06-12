@@ -4,6 +4,7 @@ import GigList from "./GigList";
 // import { contents } from "../../utils/data";
 import { GigContext } from "../../context/GigProvider";
 import { Spinner } from "react-bootstrap";
+import AuthGigList from "./AuthGigList";
 
 const Gig = () => {
   const { fetchGig, gigs, loading } = useContext(GigContext);
@@ -24,7 +25,17 @@ const Gig = () => {
                 <h1 style={{ textAlign: "center" }}>No Gig found!!!</h1>
               </div>
             )
-          : gigs.map((array: any) => <GigList gig={array} />)}
+          : gigs.map((array: any) => {
+              return (
+                <div>
+                  {sessionStorage.getItem("gig_token") ? (
+                    <AuthGigList gig={array} />
+                  ) : (
+                    <GigList gig={array} />
+                  )}
+                </div>
+              );
+            })}
       </Flex>
     </Container>
   );
