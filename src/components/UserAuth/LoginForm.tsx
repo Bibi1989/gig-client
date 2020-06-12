@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
+import styled from "styled-components";
 import FormParent from "./Form";
 import { Form, Button } from "semantic-ui-react";
 import { IForm2 } from "../../utils/IForm";
 import { UserContext } from "../../context/UserProvider";
 import { useHistory } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 const LoginForm = () => {
-  const { loginUser } = useContext(UserContext);
+  const { loginUser, loading } = useContext(UserContext);
   const history = useHistory();
   const [values, setValues] = useState({
     email: "",
@@ -22,6 +24,18 @@ const LoginForm = () => {
   const onsubmit = (e: React.FormEvent) => {
     loginUser(values, history);
   };
+
+  if (loading) {
+    return (
+      <LoadComp>
+        <Spinner
+          animation='border'
+          variant='info'
+          style={{ width: "70px", height: "70px" }}
+        />
+      </LoadComp>
+    );
+  }
   return (
     <FormParent title='Login Here'>
       <Form onSubmit={onsubmit}>
@@ -48,3 +62,10 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+const LoadComp = styled.div`
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

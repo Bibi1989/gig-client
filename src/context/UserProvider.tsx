@@ -115,6 +115,7 @@ export const UserProvider = ({ children }: any) => {
       value={{
         registerUser,
         loginUser,
+        loading: state.loading,
       }}
     >
       {children}

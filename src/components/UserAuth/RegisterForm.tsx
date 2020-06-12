@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
+import styled from "styled-components";
 import FormParent from "./Form";
 import { Form, Button } from "semantic-ui-react";
 import { IForm2 } from "../../utils/IForm";
 import { UserContext } from "../../context/UserProvider";
 import { useHistory } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 const RegisterForm = () => {
-  const { registerUser } = useContext(UserContext);
+  const { registerUser, loading } = useContext(UserContext);
   const history = useHistory();
   const [values, setValues] = useState({
     first_name: "",
@@ -24,6 +26,18 @@ const RegisterForm = () => {
   const onsubmit = (e: React.FormEvent) => {
     registerUser(values, history);
   };
+
+  if (loading) {
+    return (
+      <LoadComp>
+        <Spinner
+          animation='border'
+          variant='info'
+          style={{ width: "70px", height: "70px" }}
+        />
+      </LoadComp>
+    );
+  }
   return (
     <FormParent title='Register User'>
       <Form onSubmit={onsubmit}>
@@ -59,10 +73,17 @@ const RegisterForm = () => {
             onChange={handleInput}
           />
         </Form.Group>
-        <Button type='submit'>Login</Button>
+        <Button type='submit'>Register</Button>
       </Form>
     </FormParent>
   );
 };
 
 export default RegisterForm;
+
+const LoadComp = styled.div`
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
