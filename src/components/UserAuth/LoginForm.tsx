@@ -3,9 +3,11 @@ import FormParent from "./Form";
 import { Form, Button } from "semantic-ui-react";
 import { IForm2 } from "../../utils/IForm";
 import { UserContext } from "../../context/UserProvider";
+import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
   const { loginUser } = useContext(UserContext);
+  const history = useHistory();
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -18,7 +20,7 @@ const LoginForm = () => {
   };
 
   const onsubmit = (e: React.FormEvent) => {
-    loginUser(values);
+    loginUser(values, history);
   };
   return (
     <FormParent title='Login Here'>

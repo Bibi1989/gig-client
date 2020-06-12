@@ -82,10 +82,12 @@ const AuthConfiq = {
 export const UserProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const registerUser = async (user: UInterface) => {
+  const registerUser = async (user: UInterface, history: any) => {
     try {
       dispatch({ type: LOADING, payload: true });
       const response = await axios.post(`${URL}/register`, user, AuthConfiq);
+      sessionStorage.setItem("gig_token", response.data.token);
+      history.push("/");
       dispatch({ type: REGISTER_USER, payload: response.data.data });
       dispatch({ type: LOADING, payload: false });
     } catch (error) {
@@ -94,10 +96,12 @@ export const UserProvider = ({ children }: any) => {
       console.log(error.response);
     }
   };
-  const loginUser = async (user: any) => {
+  const loginUser = async (user: any, history: any) => {
     try {
       dispatch({ type: LOADING, payload: true });
       const response = await axios.post(`${URL}/login`, user, AuthConfiq);
+      sessionStorage.setItem("gig_token", response.data.token);
+      history.push("/");
       dispatch({ type: LOGIN_USER, payload: response.data.data });
       dispatch({ type: LOADING, payload: false });
     } catch (error) {

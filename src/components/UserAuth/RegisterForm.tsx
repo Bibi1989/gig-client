@@ -3,9 +3,11 @@ import FormParent from "./Form";
 import { Form, Button } from "semantic-ui-react";
 import { IForm2 } from "../../utils/IForm";
 import { UserContext } from "../../context/UserProvider";
+import { useHistory } from "react-router-dom";
 
 const RegisterForm = () => {
   const { registerUser } = useContext(UserContext);
+  const history = useHistory();
   const [values, setValues] = useState({
     first_name: "",
     last_name: "",
@@ -20,7 +22,7 @@ const RegisterForm = () => {
   };
 
   const onsubmit = (e: React.FormEvent) => {
-    registerUser(values);
+    registerUser(values, history);
   };
   return (
     <FormParent title='Register User'>

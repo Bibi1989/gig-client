@@ -14,6 +14,7 @@ import RegisterComponent from "./pages/RegisterComponent";
 // bootstrap style link
 import "bootstrap/dist/css/bootstrap.min.css";
 import { UserProvider } from "./context/UserProvider";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <Router>
           <Nav />
           <Switch>
-            <Route path='/' exact component={Dash} />
+            <PrivateRoute path='/' exact component={Dash} />
             <Route path='/login' exact component={LoginComponent} />
             <Route path='/register' exact component={RegisterComponent} />
           </Switch>
