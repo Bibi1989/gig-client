@@ -74,5 +74,5 @@ const ShowImage = styled.div`
   }
 `;
 const H1 = styled.h1`
-  padding: 1em;
+  padding: 1em 0;
 `;
