@@ -7,6 +7,7 @@ const REGISTER_USER = "REGISTER_USER";
 const LOGIN_USER = "LOGIN_USER";
 const GET_USER = "GET_USER";
 const ERRORS = "ERRORS";
+const INVALID_PASSWORD = "INVALID_PASSWORD";
 const LOADING = "LOADING";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   login_user: null,
   get_user: null,
   errors: null,
+  invalid_password: null,
   loading: false,
 };
 
@@ -22,6 +24,7 @@ interface IState {
   login_user: null | {};
   get_user: null | {};
   errors: null | {};
+  invalid_password: null | {};
   loading: boolean;
 }
 
@@ -59,6 +62,11 @@ const reducer = (state: IState, action: IAction) => {
         ...state,
         errors: { ...action.payload },
       };
+    case INVALID_PASSWORD:
+      return {
+        ...state,
+        invalid_password: { ...action.payload },
+      };
     case LOADING:
       return {
         ...state,
@@ -88,9 +96,11 @@ export const UserProvider = ({ children }: any) => {
       const response = await axios.post(`${URL}/register`, user, AuthConfiq);
       sessionStorage.setItem("gig_token", response.data.token);
       history.push("/");
+
       dispatch({ type: REGISTER_USER, payload: response.data.data });
       dispatch({ type: LOADING, payload: false });
     } catch (error) {
+      console.log(error.response);
       dispatch({ type: LOADING, payload: false });
       dispatch({ type: ERRORS, payload: error.response.data.error });
     }
@@ -105,7 +115,19 @@ export const UserProvider = ({ children }: any) => {
       dispatch({ type: LOGIN_USER, payload: response.data.data });
     } catch (error) {
       dispatch({ type: LOADING, payload: false });
-      dispatch({ type: ERRORS, payload: error.response.data.error });
+      console.log(error.response);
+      dispatch({
+        type: ERRORS,
+        payload:
+          error.response === undefined
+            ? { network: "No network!!!" }
+            : error.response.data.error,
+      });
+      if (error.response.data.status === "invalid")
+        return dispatch({
+          type: INVALID_PASSWORD,
+          payload: { error: error.response.data.error },
+        });
     }
   };
   return (
@@ -115,6 +137,7 @@ export const UserProvider = ({ children }: any) => {
         loginUser,
         loading: state.loading,
         errors: state.errors,
+        invalid_password: state.invalid_password,
       }}
     >
       {children}

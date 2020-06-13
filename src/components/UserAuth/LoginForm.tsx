@@ -8,7 +8,9 @@ import { UserContext } from "../../context/UserProvider";
 import { Spinner, Alert } from "react-bootstrap";
 
 const LoginForm = () => {
-  const { loginUser, loading, errors } = useContext(UserContext);
+  const { loginUser, loading, errors, invalid_password } = useContext(
+    UserContext
+  );
   const path = window.location.origin;
   const history = useHistory();
 
@@ -29,7 +31,10 @@ const LoginForm = () => {
     loginUser(values, path);
   };
 
-  const { email, password, invalid } = errors || {};
+  const { email, password, invalid, network } = errors || {};
+  const { error } = invalid_password || {};
+
+  console.log(error);
 
   useEffect(() => {
     if (invalid) setShow(true);
@@ -48,6 +53,8 @@ const LoginForm = () => {
   }
   return (
     <FormParent title='Login Here'>
+      <P show={network ? true : false}>{network !== undefined && network}</P>
+      <P show={error ? true : false}>{error !== undefined && error}</P>
       {invalid && show && (!email || !password) && (
         <Alert variant='danger' onClose={() => setShow(false)} dismissible>
           <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
@@ -102,12 +109,13 @@ export const LoadComp = styled.div`
   align-items: center;
 `;
 
-const P = styled.p`
+const P = styled.p<{ show: boolean }>`
   color: orangered;
   text-align: center;
-  padding: 1em;
-  width: 80%;
+  padding: ${(props) => (props.show ? "1em" : "")};
+  width: 100%;
   margin: auto;
-  background: #fff6f6;
+  background: #f8d7da;
+  border-radius: 0.25em;
   /* text-decoration: underline; */
 `;
