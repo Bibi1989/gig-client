@@ -1,15 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import FormParent from "./Form";
 import { Form, Button } from "semantic-ui-react";
 import { IForm2 } from "../../utils/IForm";
 import { UserContext } from "../../context/UserProvider";
-import { useHistory } from "react-router-dom";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Alert } from "react-bootstrap";
 
 const RegisterForm = () => {
   const { registerUser, loading, errors } = useContext(UserContext);
   const history = useHistory();
+  const [show, setShow] = useState(true);
   const [values, setValues] = useState({
     first_name: "",
     last_name: "",
@@ -27,7 +28,11 @@ const RegisterForm = () => {
     registerUser(values, history);
   };
 
-  const { first_name, last_name, email, password } = errors || [];
+  const { first_name, last_name, email, password, invalid } = errors || [];
+
+  useEffect(() => {
+    if (invalid) setShow(true);
+  }, [errors]);
 
   if (loading) {
     return (
@@ -42,6 +47,24 @@ const RegisterForm = () => {
   }
   return (
     <FormParent title='Register User'>
+      {invalid && show && (!email || !password) && (
+        <Alert variant='danger' onClose={() => setShow(false)} dismissible>
+          <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+          <p>
+            {errors.invalid}{" "}
+            <span
+              onClick={() => history.push("/login")}
+              style={{
+                color: "orangered",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+            >
+              Click here to Login
+            </span>
+          </p>
+        </Alert>
+      )}
       <Form onSubmit={onsubmit}>
         <Form.Group widths='equal'>
           <Form.Input
