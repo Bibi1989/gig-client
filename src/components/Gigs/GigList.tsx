@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Icon, Card } from "semantic-ui-react";
-import { Badge, Accordion, Button } from "react-bootstrap";
+import { Card } from "semantic-ui-react";
+import { Badge } from "react-bootstrap";
 
 import { fullName } from "../../utils/fullName";
+import { ShowContacts } from "./AuthGigList";
 
 const GigList = ({ gig }: any) => {
   const header = (
@@ -28,14 +29,7 @@ const GigList = ({ gig }: any) => {
   );
   const footer = (
     <>
-      <P>
-        <Icon name='browser' /> LinkedIn:{" "}
-        {gig.linkedin_url ? gig.linkedin_url : "No LinkedIn link"}
-      </P>
-      <P>
-        <Icon name='browser' /> Github:{" "}
-        {gig.github_url ? gig.github_url : "No Github link"}
-      </P>
+      <ShowContacts gig={gig} />
     </>
   );
   return (

@@ -81,6 +81,20 @@ const AddGig = () => {
   const onsubmit = (e: any) => {
     e.preventDefault();
     addGig({ ...values, stack, technologies, proficiency, location });
+    setValues({
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone: "",
+      stack: "",
+      password: "",
+      location: "",
+      yoe: "",
+      github_url: "",
+      linkedin_url: "",
+      profile: "",
+      experience: "",
+    });
   };
   return (
     <Wrapper>
@@ -107,6 +121,7 @@ const AddGig = () => {
                     placeholder='First name'
                     name='first_name'
                     onChange={handleInput}
+                    value={values.first_name}
                   />
                   <Form.Input
                     fluid
@@ -114,6 +129,7 @@ const AddGig = () => {
                     placeholder='Last name'
                     name='last_name'
                     onChange={handleInput}
+                    value={values.last_name}
                   />
                 </Form.Group>
                 <Form.Group widths='equal'>
@@ -123,6 +139,7 @@ const AddGig = () => {
                     placeholder='Email Address'
                     name='email'
                     onChange={handleInput}
+                    value={values.email}
                   />
                   <Form.Input
                     fluid
@@ -130,16 +147,10 @@ const AddGig = () => {
                     placeholder='Phone Number'
                     name='phone'
                     onChange={handleInput}
+                    value={values.phone}
                   />
                 </Form.Group>
                 <Form.Group widths='equal'>
-                  <Form.Input
-                    fluid
-                    label='Password'
-                    placeholder='Password'
-                    name='password'
-                    onChange={handleInput}
-                  />
                   <Form.Field
                     control={Select}
                     label='Location'
@@ -158,6 +169,7 @@ const AddGig = () => {
                     placeholder='Profile'
                     name='profile'
                     onChange={handleInput}
+                    value={values.profile}
                   />
                   <Form.Field
                     id='form-textarea-control-opinion'
@@ -166,6 +178,7 @@ const AddGig = () => {
                     placeholder='Experience'
                     name='experience'
                     onChange={handleInput}
+                    value={values.experience}
                   />
                 </Form.Group>
                 <Form.Group widths='equal'>
@@ -202,6 +215,7 @@ const AddGig = () => {
                     placeholder='Year Of Experience'
                     name='yoe'
                     onChange={handleInput}
+                    value={values.yoe}
                   />
                 </Form.Group>
                 <Form.Group widths='equal'>
@@ -216,6 +230,7 @@ const AddGig = () => {
                     placeholder='Github'
                     name='github_url'
                     onChange={handleInput}
+                    value={values.github_url}
                   />
                 </Form.Group>
                 <Form.Group widths='equal'>
@@ -225,6 +240,7 @@ const AddGig = () => {
                     placeholder='LinkendIn'
                     name='linlin_url'
                     onChange={handleInput}
+                    value={values.first_name}
                   />
                 </Form.Group>
                 <Button type='submit' variant='info'>

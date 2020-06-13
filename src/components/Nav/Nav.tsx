@@ -41,7 +41,7 @@ const Navs = () => {
               <NavLinkStyle
                 onClick={() => {
                   sessionStorage.removeItem("gig_token");
-                  history.push("/home");
+                  window.location.href = window.location.origin + "/home";
                 }}
               >
                 Logout

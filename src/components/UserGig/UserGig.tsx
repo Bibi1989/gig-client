@@ -3,13 +3,29 @@ import styled from "styled-components";
 import { GigContext } from "../../context/GigProvider";
 import List from "./List";
 import { Icon } from "semantic-ui-react";
+import { LoadComp } from "../UserAuth/LoginForm";
+import { Spinner } from "react-bootstrap";
 
 const UserGig = () => {
-  const { fetchProfileGig, gig, update, delete_gig } = useContext(GigContext);
+  const { fetchProfileGig, gig, update, delete_gig, loading } = useContext(
+    GigContext
+  );
 
   useEffect(() => {
     fetchProfileGig();
   }, [update, delete_gig]);
+
+  if (loading) {
+    return (
+      <LoadComp>
+        <Spinner
+          animation='border'
+          variant='info'
+          style={{ width: "70px", height: "70px" }}
+        />
+      </LoadComp>
+    );
+  }
 
   return (
     <Container>

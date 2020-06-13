@@ -92,22 +92,20 @@ export const UserProvider = ({ children }: any) => {
       dispatch({ type: LOADING, payload: false });
     } catch (error) {
       dispatch({ type: LOADING, payload: false });
-      dispatch({ type: ERRORS, payload: error.response });
-      console.log(error.response);
+      dispatch({ type: ERRORS, payload: error.response.data.error });
     }
   };
-  const loginUser = async (user: any, history: any) => {
+  const loginUser = async (user: any, path: string) => {
     try {
       dispatch({ type: LOADING, payload: true });
       const response = await axios.post(`${URL}/login`, user, AuthConfiq);
       sessionStorage.setItem("gig_token", response.data.token);
-      history.push("/");
-      dispatch({ type: LOGIN_USER, payload: response.data.data });
       dispatch({ type: LOADING, payload: false });
+      window.location.href = path;
+      dispatch({ type: LOGIN_USER, payload: response.data.data });
     } catch (error) {
       dispatch({ type: LOADING, payload: false });
-      dispatch({ type: ERRORS, payload: error.response });
-      console.log(error.response);
+      dispatch({ type: ERRORS, payload: error.response.data.error });
     }
   };
   return (
@@ -116,6 +114,7 @@ export const UserProvider = ({ children }: any) => {
         registerUser,
         loginUser,
         loading: state.loading,
+        errors: state.errors,
       }}
     >
       {children}

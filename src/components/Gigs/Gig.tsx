@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import GigList from "./GigList";
 // import { contents } from "../../utils/data";
@@ -7,10 +7,11 @@ import { Spinner } from "react-bootstrap";
 import AuthGigList from "./AuthGigList";
 
 const Gig = () => {
+  const divRef = useRef<boolean>(false);
   const { fetchGig, gigs, loading } = useContext(GigContext);
   useEffect(() => {
     fetchGig();
-  }, []);
+  }, [divRef]);
   return (
     <Container>
       <Flex>
@@ -27,7 +28,7 @@ const Gig = () => {
             )
           : gigs.map((array: any) => {
               return (
-                <div>
+                <div key={array.id}>
                   {sessionStorage.getItem("gig_token") ? (
                     <AuthGigList gig={array} />
                   ) : (
@@ -43,7 +44,15 @@ const Gig = () => {
 
 export default Gig;
 
-const Container = styled.div``;
+const Container = styled.div`
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+`;
 const Flex = styled.div`
   padding: 2em 10%;
 

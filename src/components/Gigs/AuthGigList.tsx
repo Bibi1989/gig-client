@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Icon, Card, Accordion } from "semantic-ui-react";
-import { Badge, Button } from "react-bootstrap";
+import { Badge } from "react-bootstrap";
 
 import { fullName } from "../../utils/fullName";
 
@@ -88,7 +88,7 @@ const BadgeStyle = styled(Badge)`
   color: white;
 `;
 
-const ShowContacts = ({ gig }: any) => {
+export const ShowContacts = ({ gig }: any) => {
   const [state, setState] = useState({ activeIndex: 1 });
 
   const handleClick = (e: any, titleProps: any) => {

@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 
 const RegisterForm = () => {
-  const { registerUser, loading } = useContext(UserContext);
+  const { registerUser, loading, errors } = useContext(UserContext);
   const history = useHistory();
   const [values, setValues] = useState({
     first_name: "",
@@ -26,6 +26,8 @@ const RegisterForm = () => {
   const onsubmit = (e: React.FormEvent) => {
     registerUser(values, history);
   };
+
+  const { first_name, last_name, email, password } = errors || [];
 
   if (loading) {
     return (
@@ -47,14 +49,18 @@ const RegisterForm = () => {
             label='First name'
             placeholder='First name'
             name='first_name'
+            value={values.first_name}
             onChange={handleInput}
+            error={first_name ? { content: first_name } : false}
           />
           <Form.Input
             fluid
             label='Last name'
             placeholder='Last name'
             name='last_name'
+            value={values.last_name}
             onChange={handleInput}
+            error={last_name ? { content: last_name } : false}
           />
         </Form.Group>
         <Form.Group widths='equal'>
@@ -63,14 +69,18 @@ const RegisterForm = () => {
             label='Email Address'
             placeholder='Email Address'
             name='email'
+            value={values.email}
             onChange={handleInput}
+            error={email ? { content: email } : false}
           />
           <Form.Input
             fluid
             label='Password'
             placeholder='Password'
             name='password'
+            value={values.password}
             onChange={handleInput}
+            error={password ? { content: password } : false}
           />
         </Form.Group>
         <Button type='submit'>Register</Button>

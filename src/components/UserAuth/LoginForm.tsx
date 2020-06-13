@@ -4,12 +4,12 @@ import FormParent from "./Form";
 import { Form, Button } from "semantic-ui-react";
 import { IForm2 } from "../../utils/IForm";
 import { UserContext } from "../../context/UserProvider";
-import { useHistory } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 
 const LoginForm = () => {
-  const { loginUser, loading } = useContext(UserContext);
-  const history = useHistory();
+  const { loginUser, loading, errors } = useContext(UserContext);
+  const path = window.location.origin;
+
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -22,8 +22,10 @@ const LoginForm = () => {
   };
 
   const onsubmit = (e: React.FormEvent) => {
-    loginUser(values, history);
+    loginUser(values, path);
   };
+
+  const { email, password } = errors || [];
 
   if (loading) {
     return (
@@ -46,13 +48,17 @@ const LoginForm = () => {
             placeholder='Email Address'
             name='email'
             onChange={handleInput}
+            value={values.email}
+            error={email ? { content: email } : false}
           />
           <Form.Input
             fluid
             label='Password'
             placeholder='Password'
             name='password'
+            value={values.password}
             onChange={handleInput}
+            error={password ? { content: password } : false}
           />
         </Form.Group>
         <Button type='submit'>Login</Button>
@@ -63,7 +69,7 @@ const LoginForm = () => {
 
 export default LoginForm;
 
-const LoadComp = styled.div`
+export const LoadComp = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: center;
