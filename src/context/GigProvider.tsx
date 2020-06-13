@@ -188,6 +188,17 @@ export const GigProvider = ({ children }: any) => {
       console.log(error.response);
     }
   };
+  const updateImage = async (id: number, file: any, gig: any) => {
+    try {
+      dispatch({ type: LOADING, payload: true });
+      const response = await axios.patch(`${URL}/upload/${id}`, { file, gig });
+      dispatch({ type: LOADING, payload: false });
+      dispatch({ type: UPDATE_GIG, payload: response.data.data });
+    } catch (error) {
+      dispatch({ type: LOADING, payload: false });
+      console.log(error.response);
+    }
+  };
   const deleteGig = async (id: number) => {
     try {
       dispatch({ type: LOADING, payload: true });
@@ -210,6 +221,7 @@ export const GigProvider = ({ children }: any) => {
         currentGig,
         updateGig,
         deleteGig,
+        updateImage,
         gigs: state.gigs,
         gig: state.gig,
         current: state.current,

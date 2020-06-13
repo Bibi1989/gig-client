@@ -5,6 +5,7 @@ import { Icon, Card } from "semantic-ui-react";
 import { Badge } from "react-bootstrap";
 import { GigContext } from "../../context/GigProvider";
 import ModifyComponent from "./ModifyComponent";
+import ImageUpload from "./ImageUpload";
 
 const List = ({ gig }: any) => {
   const { fetchProfileGig, currentGig, deleteGig, current } = useContext(
@@ -29,8 +30,14 @@ const List = ({ gig }: any) => {
         </BadgeStyle>
       </div>
       <Avatar>
-        {gig.first_name[0].toUpperCase()}
-        {gig.last_name[0].toUpperCase()}
+        {gig.profile_image ? (
+          <img src={gig.profile_image} />
+        ) : (
+          <>
+            {gig.first_name[0].toUpperCase()}
+            {gig.last_name[0].toUpperCase()}
+          </>
+        )}
       </Avatar>
     </Flex>
   );
@@ -82,6 +89,10 @@ const List = ({ gig }: any) => {
       </CardStyle>
 
       <ModifyComponent gig={current} />
+
+      <Line>
+        <ImageUpload gig={gig} />
+      </Line>
     </Grid>
   );
 };
@@ -109,6 +120,17 @@ export const Avatar = styled.div`
   left: 50%;
   transform: translateX(-50%);
   background: teal;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
+`;
+const Line = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2em;
 `;
 const H2 = styled.h2`
   color: #555555;

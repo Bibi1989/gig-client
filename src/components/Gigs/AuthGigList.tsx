@@ -16,8 +16,14 @@ const AuthGigList = ({ gig }: any) => {
         </BadgeStyle>
       </div>
       <Avatar>
-        {gig.first_name[0].toUpperCase()}
-        {gig.last_name[0].toUpperCase()}
+        {gig.profile_image ? (
+          <img src={gig.profile_image} />
+        ) : (
+          <>
+            {gig.first_name[0].toUpperCase()}
+            {gig.last_name[0].toUpperCase()}
+          </>
+        )}
       </Avatar>
     </Flex>
   );
