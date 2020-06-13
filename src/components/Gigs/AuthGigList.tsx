@@ -4,6 +4,7 @@ import { Icon, Card, Accordion } from "semantic-ui-react";
 import { Badge } from "react-bootstrap";
 
 import { fullName } from "../../utils/fullName";
+import { Avatar } from "../UserGig/List";
 
 const AuthGigList = ({ gig }: any) => {
   const header = (
@@ -14,6 +15,10 @@ const AuthGigList = ({ gig }: any) => {
           {gig.stack} Developer
         </BadgeStyle>
       </div>
+      <Avatar>
+        {gig.first_name[0].toUpperCase()}
+        {gig.last_name[0].toUpperCase()}
+      </Avatar>
     </Flex>
   );
   const descriptions = (
@@ -51,6 +56,7 @@ const Grid = styled.div`
 `;
 const Flex = styled.div`
   display: flex;
+  position: relative;
 `;
 const H2 = styled.h2`
   color: #555555;

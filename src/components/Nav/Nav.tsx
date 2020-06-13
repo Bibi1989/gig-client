@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 const Navs = () => {
   const history = useHistory();
   return (
-    <NavbarStyle bg='light' expand='lg'>
+    <NavbarStyle bg='light' expand='lg' sticky='top'>
       <Navbar.Brand href='#home'>
         <LinkStyle
           className='links'

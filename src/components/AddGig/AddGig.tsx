@@ -240,7 +240,7 @@ const AddGig = () => {
                     placeholder='LinkendIn'
                     name='linlin_url'
                     onChange={handleInput}
-                    value={values.first_name}
+                    value={values.linkedin_url}
                   />
                 </Form.Group>
                 <Button type='submit' variant='info'>

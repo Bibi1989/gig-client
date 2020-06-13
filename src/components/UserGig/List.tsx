@@ -28,6 +28,10 @@ const List = ({ gig }: any) => {
           {gig.stack} Developer
         </BadgeStyle>
       </div>
+      <Avatar>
+        {gig.first_name[0].toUpperCase()}
+        {gig.last_name[0].toUpperCase()}
+      </Avatar>
     </Flex>
   );
   const descriptions = (
@@ -89,6 +93,22 @@ const Grid = styled.div`
 `;
 const Flex = styled.div`
   display: flex;
+  position: relative;
+`;
+export const Avatar = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  color: white;
+  font-size: 3em;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: teal;
 `;
 const H2 = styled.h2`
   color: #555555;
