@@ -54,14 +54,14 @@ export const BadgeStyle = styled(Badge)`
       : bgColor === "Full" && "blue"};
   color: white;
 `;
-export const Avatar = styled.div`
+export const Avatar = styled.div<{ width: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70px;
-  height: 70px;
+  width: ${(props) => (props.width ? props.width : "70px")};
+  height: ${(props) => (props.width ? props.width : "70px")};
   color: white;
-  font-size: 3em;
+  font-size: ${(props) => (props.width === "35px" ? "1em" : "3em")};
   border-radius: 50%;
   position: absolute;
   bottom: -80%;

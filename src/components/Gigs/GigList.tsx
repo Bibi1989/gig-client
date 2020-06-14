@@ -23,7 +23,7 @@ const GigList = ({ gig }: any) => {
           {gig.stack} Developer
         </BadgeStyle>
       </div>
-      <Avatar>
+      <Avatar width='70px'>
         {gig.profile_image ? (
           <img src={gig.profile_image} />
         ) : (
