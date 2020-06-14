@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useState } from "react";
 import axios from "axios";
 
 export const GigContext = createContext<any | null>(null);
@@ -95,8 +95,8 @@ const reducer = (state: IState, action: IAction) => {
   }
 };
 
-const URL = "https://gig-api.herokuapp.com/api/v1/gig";
-// const URL = "http://localhost:5005/api/v1/gig";
+// const URL = "https://gig-api.herokuapp.com/api/v1/gig";
+const URL = "http://localhost:5005/api/v1/gig";
 
 const AuthConfiq = {
   headers: {
@@ -107,6 +107,7 @@ const AuthConfiq = {
 
 export const GigProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [skillError, setSkillError] = useState(false);
 
   const searchGigLocation = async (text: string) => {
     try {
@@ -178,6 +179,9 @@ export const GigProvider = ({ children }: any) => {
     }
   };
   const updateGig = async (id: number, gig: any) => {
+    if (!gig.location || !gig.stack || !gig.proficiency || !gig.technologies) {
+      setSkillError(true);
+    }
     try {
       dispatch({ type: LOADING, payload: true });
       const response = await axios.patch(`${URL}/${id}`, gig, AuthConfiq);
@@ -228,6 +232,8 @@ export const GigProvider = ({ children }: any) => {
         update: state.update,
         delete_gig: state.delete_gig,
         loading: state.loading,
+        skillError,
+        setSkillError,
         addGig,
         searchGigLocation,
         searchGigProficiency,

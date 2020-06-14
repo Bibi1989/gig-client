@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { Icon, Card, Accordion } from "semantic-ui-react";
-import { Badge } from "react-bootstrap";
 
 import { fullName } from "../../utils/fullName";
-import { Avatar } from "../UserGig/List";
+import {
+  BadgeStyle,
+  FlexFooter,
+  CardStyle,
+  Flex,
+  H2,
+  Ul,
+  Li,
+  P,
+  Grid,
+  Avatar,
+} from "../commons/style";
 
 const AuthGigList = ({ gig }: any) => {
   const header = (
@@ -56,49 +65,6 @@ const AuthGigList = ({ gig }: any) => {
 };
 
 export default AuthGigList;
-
-const Grid = styled.div`
-  margin-bottom: 1em;
-`;
-const Flex = styled.div`
-  display: flex;
-  position: relative;
-`;
-const H2 = styled.h2`
-  color: #555555;
-`;
-const P = styled.p`
-  color: #888;
-`;
-const Ul = styled.ul`
-  color: #888;
-`;
-const Li = styled.li`
-  color: #888;
-`;
-const FlexFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-const ActionIcons = styled.div`
-  i:first-child {
-    margin-right: 1em;
-  }
-`;
-
-const CardStyle = styled(Card)`
-  width: 100% !important;
-`;
-
-const BadgeStyle = styled(Badge)`
-  background: ${({ bgColor }) =>
-    bgColor === "Front"
-      ? "orangered"
-      : bgColor === "Back"
-      ? "teal"
-      : bgColor === "Full" && "blue"};
-  color: white;
-`;
 
 export const ShowContacts = ({ gig }: any) => {
   const [state, setState] = useState({ activeIndex: 1 });

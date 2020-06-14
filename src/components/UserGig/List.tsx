@@ -1,16 +1,43 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { fullName } from "../../utils/fullName";
-import { Icon, Card } from "semantic-ui-react";
+import { Icon, Card, Accordion } from "semantic-ui-react";
 import { Badge } from "react-bootstrap";
 import { GigContext } from "../../context/GigProvider";
 import ModifyComponent from "./ModifyComponent";
 import ImageUpload from "./ImageUpload";
+import SelectModification from "./SelectModification";
+
+import {
+  BadgeStyle,
+  FlexFooter,
+  CardStyle,
+  Flex,
+  H2,
+  Ul,
+  Li,
+  P,
+  Grid,
+  Avatar,
+  ActionIcons,
+  Line,
+} from "../commons/style";
 
 const List = ({ gig }: any) => {
   const { fetchProfileGig, currentGig, deleteGig, current } = useContext(
     GigContext
   );
+
+  const [state, setState] = useState({ activeIndex: 1 });
+
+  const handleClick = (e: any, titleProps: any) => {
+    const { index } = titleProps;
+    const { activeIndex } = state;
+    const newIndex = activeIndex === index ? -1 : index;
+
+    setState({ activeIndex: newIndex });
+  };
+  const { activeIndex } = state;
 
   const handlePop = (gig: any) => {
     currentGig(gig);
@@ -53,17 +80,42 @@ const List = ({ gig }: any) => {
     </>
   );
   const footer = (
-    <FlexFooter>
-      <div>
-        <P>
-          <Icon name='browser' /> LinkedIn:{" "}
-          {gig.linkedin_url ? gig.linkedin_url : "No LinkedIn link"}
-        </P>
-        <P>
-          <Icon name='browser' /> Github:{" "}
-          {gig.github_url ? gig.github_url : "No Github link"}
-        </P>
-      </div>
+    <>
+      <Accordion styled style={{ width: "100%" }}>
+        <Accordion.Title
+          active={activeIndex === 0}
+          index={0}
+          onClick={handleClick}
+        >
+          <Icon name='dropdown' />
+          Click To See Gig Contacts
+        </Accordion.Title>
+        <Accordion.Content
+          active={activeIndex === 0}
+          style={{ width: "100% !important" }}
+        >
+          <FlexFooter>
+            <div>
+              <P>
+                <Icon name='phone' /> Phone Number:{" "}
+                {gig.phone ? gig.phone : "No Phone Number"}
+              </P>
+              <P>
+                <Icon name='envelope' /> Email Address:{" "}
+                {gig.email ? gig.email : "No Email Address"}
+              </P>
+              <P>
+                <Icon name='browser' /> LinkedIn:{" "}
+                {gig.linkedin_url ? gig.linkedin_url : "No LinkedIn link"}
+              </P>
+              <P>
+                <Icon name='browser' /> Github:{" "}
+                {gig.github_url ? gig.github_url : "No Github link"}
+              </P>
+            </div>
+          </FlexFooter>
+        </Accordion.Content>
+      </Accordion>
       <ActionIcons>
         <Icon
           name='trash'
@@ -78,7 +130,7 @@ const List = ({ gig }: any) => {
           onClick={() => handlePop(gig)}
         />
       </ActionIcons>
-    </FlexFooter>
+    </>
   );
   return (
     <Grid>
@@ -88,7 +140,13 @@ const List = ({ gig }: any) => {
         <Card.Content>{footer}</Card.Content>
       </CardStyle>
 
-      <ModifyComponent gig={current} />
+      <Line>
+        <ModifyComponent gig={current} />
+      </Line>
+
+      <Line>
+        <SelectModification gig={gig} />
+      </Line>
 
       <Line>
         <ImageUpload gig={gig} />
@@ -98,72 +156,3 @@ const List = ({ gig }: any) => {
 };
 
 export default List;
-
-const Grid = styled.div`
-  margin-bottom: 1em;
-`;
-const Flex = styled.div`
-  display: flex;
-  position: relative;
-`;
-export const Avatar = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 100px;
-  color: white;
-  font-size: 3em;
-  border-radius: 50%;
-  position: absolute;
-  bottom: -100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: teal;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-  }
-`;
-const Line = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 2em;
-`;
-const H2 = styled.h2`
-  color: #555555;
-`;
-const P = styled.p`
-  color: #888;
-`;
-const Ul = styled.ul`
-  color: #888;
-`;
-const Li = styled.li`
-  color: #888;
-`;
-const FlexFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-const ActionIcons = styled.div`
-  i:first-child {
-    margin-right: 1em;
-  }
-`;
-
-const CardStyle = styled(Card)`
-  width: 100% !important;
-`;
-
-const BadgeStyle = styled(Badge)`
-  background: ${({ bgColor }) =>
-    bgColor === "Front"
-      ? "orangered"
-      : bgColor === "Back"
-      ? "teal"
-      : bgColor === "Full" && "blue"};
-  color: white;
-`;

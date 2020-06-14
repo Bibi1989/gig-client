@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { TextArea, Form, Button } from "semantic-ui-react";
 import { GigContext } from "../../context/GigProvider";
+import { H1Style } from "../commons/style";
 
 const ModifyComponent = ({ gig }: any) => {
   const { updateGig } = useContext(GigContext);
@@ -64,6 +65,7 @@ const ModifyComponent = ({ gig }: any) => {
   };
   return (
     <FormStyle onSubmit={onsubmit}>
+      <H1Style>Update Profile</H1Style>
       <Form.Group widths='equal'>
         <Form.Input
           fluid
@@ -157,4 +159,6 @@ const ModifyComponent = ({ gig }: any) => {
 
 export default ModifyComponent;
 
-const FormStyle = styled(Form)``;
+const FormStyle = styled(Form)`
+  width: 100%;
+`;

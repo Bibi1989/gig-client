@@ -1,11 +1,18 @@
 import React from "react";
-import styled from "styled-components";
 import { Card } from "semantic-ui-react";
-import { Badge } from "react-bootstrap";
 
 import { fullName } from "../../utils/fullName";
 import { ShowContacts } from "./AuthGigList";
-import { Avatar } from "../UserGig/List";
+import {
+  BadgeStyle,
+  CardStyle,
+  Flex,
+  H2,
+  Ul,
+  Li,
+  Grid,
+  Avatar,
+} from "../commons/style";
 
 const GigList = ({ gig }: any) => {
   const header = (
@@ -55,37 +62,3 @@ const GigList = ({ gig }: any) => {
 };
 
 export default GigList;
-
-const Grid = styled.div`
-  margin-bottom: 1em;
-`;
-const Flex = styled.div`
-  display: flex;
-  position: relative;
-`;
-const H2 = styled.h2`
-  color: #555555;
-`;
-const P = styled.p`
-  color: #888;
-`;
-const Ul = styled.ul`
-  color: #888;
-`;
-const Li = styled.li`
-  color: #888;
-`;
-
-const CardStyle = styled(Card)`
-  width: 100% !important;
-`;
-
-const BadgeStyle = styled(Badge)`
-  background: ${({ bgColor }) =>
-    bgColor === "Front"
-      ? "orangered"
-      : bgColor === "Back"
-      ? "teal"
-      : bgColor === "Full" && "blue"};
-  color: white;
-`;

@@ -4,6 +4,7 @@ import { Input, Form, Button } from "semantic-ui-react";
 import { GigContext } from "../../context/GigProvider";
 import axios from "axios";
 import dotenv from "dotenv";
+import { H1Style } from "../commons/style";
 
 dotenv.config();
 
@@ -38,7 +39,7 @@ const ImageUpload = ({ gig }: any) => {
   };
   return (
     <ImageWrapper>
-      <H1>Image Upload</H1>
+      <H1Style>Image Upload</H1Style>
       <Form onSubmit={onsubmit} style={{ width: "100% !important" }}>
         <Input
           className='input'
@@ -46,7 +47,9 @@ const ImageUpload = ({ gig }: any) => {
           placeholder='Upload image'
           onChange={handleFile}
         />
-        <Button type='submit'>Upload</Button>
+        <Button type='submit' style={{ marginTop: "1em" }}>
+          Upload
+        </Button>
       </Form>
       <ShowImage>
         <img src={file && file} />
@@ -68,11 +71,9 @@ const ShowImage = styled.div`
   height: 100px;
   border-radius: 5px;
   overflow: hidden;
+  margin-top: 1em;
 
   img {
     width: 100%;
   }
-`;
-const H1 = styled.h1`
-  padding: 1em 0;
 `;
