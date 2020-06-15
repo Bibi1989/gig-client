@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { fullName } from "../../utils/fullName";
 import { Icon, Card, Accordion } from "semantic-ui-react";
-import { Badge } from "react-bootstrap";
 import { GigContext } from "../../context/GigProvider";
 import ModifyComponent from "./ModifyComponent";
 import ImageUpload from "./ImageUpload";
@@ -60,10 +59,11 @@ const List = ({ gig }: any) => {
         {gig.profile_image ? (
           <img src={gig.profile_image} />
         ) : (
-          <>
-            {gig.first_name[0].toUpperCase()}
-            {gig.last_name[0].toUpperCase()}
-          </>
+          // <>
+          //   {gig.first_name[0].toUpperCase()}
+          //   {gig.last_name[0].toUpperCase()}
+          // </>
+          ""
         )}
       </Avatar>
     </Flex>

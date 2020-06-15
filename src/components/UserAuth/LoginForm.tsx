@@ -34,8 +34,6 @@ const LoginForm = () => {
   const { email, password, invalid, network } = errors || {};
   const { error } = invalid_password || {};
 
-  console.log(error);
-
   useEffect(() => {
     if (invalid) setShow(true);
   }, [errors]);

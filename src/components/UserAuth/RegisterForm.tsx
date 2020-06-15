@@ -10,6 +10,7 @@ import { Spinner, Alert } from "react-bootstrap";
 const RegisterForm = () => {
   const { registerUser, loading, errors } = useContext(UserContext);
   const history = useHistory();
+  const path = window.location.origin;
   const [show, setShow] = useState(true);
   const [values, setValues] = useState({
     first_name: "",
@@ -25,7 +26,7 @@ const RegisterForm = () => {
   };
 
   const onsubmit = (e: React.FormEvent) => {
-    registerUser(values, history);
+    registerUser(values, path);
   };
 
   const { first_name, last_name, email, password, invalid } = errors || [];

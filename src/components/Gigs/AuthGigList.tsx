@@ -28,10 +28,11 @@ const AuthGigList = ({ gig }: any) => {
         {gig.profile_image ? (
           <img src={gig.profile_image} />
         ) : (
-          <>
-            {gig.first_name[0].toUpperCase()}
-            {gig.last_name[0].toUpperCase()}
-          </>
+          // <>
+          //   {gig.first_name[0].toUpperCase()}
+          //   {gig.last_name[0].toUpperCase()}
+          // </>
+          ""
         )}
       </Avatar>
     </Flex>

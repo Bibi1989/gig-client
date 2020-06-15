@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Card } from "semantic-ui-react";
 import { Badge } from "react-bootstrap";
 
+const avatar = "./assets/avatar6.png";
+
 export const Grid = styled.div`
   margin-bottom: 1em;
 `;
@@ -67,7 +69,10 @@ export const Avatar = styled.div<{ width: string }>`
   bottom: -80%;
   left: 50%;
   transform: translateX(-50%);
-  background: teal;
+  background: url(${avatar});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   overflow: hidden;
 
   img {
