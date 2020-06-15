@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card } from "semantic-ui-react";
+import { Card, Form } from "semantic-ui-react";
 import { Badge } from "react-bootstrap";
 
 const avatar = "./assets/avatar6.png";
@@ -53,7 +53,7 @@ export const BadgeStyle = styled(Badge)`
       ? "orangered"
       : bgColor === "Back"
       ? "teal"
-      : bgColor === "Full" && "blue"};
+      : bgColor === "Full" && "#17A2B8"};
   color: white;
 `;
 export const Avatar = styled.div<{ width: string }>`
@@ -93,4 +93,13 @@ export const H1Style = styled.h1`
   padding: 1em 0;
   color: #777777;
   text-align: center;
+`;
+
+export const FormInputStyle = styled(Form.Input)`
+  position: relative;
+  input {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
 `;

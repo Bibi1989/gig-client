@@ -116,7 +116,12 @@ const SelectModification = ({ gig }: any) => {
         name='proficiency'
         onChange={handleInputProf}
       />
-      <Button type='submit'>Update</Button>
+      <Button
+        type='submit'
+        style={{ marginTop: "1em", background: "#00B5AD", color: "white" }}
+      >
+        Update
+      </Button>
     </FormStyle>
   );
 };

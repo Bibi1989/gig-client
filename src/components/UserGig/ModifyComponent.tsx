@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { TextArea, Form, Button } from "semantic-ui-react";
 import { GigContext } from "../../context/GigProvider";
-import { H1Style } from "../commons/style";
+import { H1Style, FormInputStyle } from "../commons/style";
 
 const ModifyComponent = ({ gig }: any) => {
   const { updateGig } = useContext(GigContext);
@@ -67,7 +67,7 @@ const ModifyComponent = ({ gig }: any) => {
     <FormStyle onSubmit={onsubmit}>
       <H1Style>Update Profile</H1Style>
       <Form.Group widths='equal'>
-        <Form.Input
+        <FormInputStyle
           fluid
           label='First name'
           placeholder='First name'
@@ -75,7 +75,7 @@ const ModifyComponent = ({ gig }: any) => {
           value={values.first_name}
           onChange={handleInput}
         />
-        <Form.Input
+        <FormInputStyle
           fluid
           label='Last name'
           placeholder='Last name'
@@ -85,7 +85,7 @@ const ModifyComponent = ({ gig }: any) => {
         />
       </Form.Group>
       <Form.Group widths='equal'>
-        <Form.Input
+        <FormInputStyle
           fluid
           label='Email Address'
           placeholder='Email Address'
@@ -93,12 +93,41 @@ const ModifyComponent = ({ gig }: any) => {
           value={values.email}
           onChange={handleInput}
         />
-        <Form.Input
+        <FormInputStyle
           fluid
           label='Phone Number'
           placeholder='Phone Number'
           name='phone'
           value={values.phone}
+          onChange={handleInput}
+        />
+      </Form.Group>
+
+      <Form.Group widths='equal'>
+        <FormInputStyle
+          fluid
+          label='Year Of Experience'
+          placeholder='Year Of Experience'
+          name='yoe'
+          value={values.yoe}
+          onChange={handleInput}
+        />
+      </Form.Group>
+      <Form.Group widths='equal'>
+        <FormInputStyle
+          fluid
+          label='Github'
+          placeholder='Github'
+          name='github_url'
+          value={values.github_url}
+          onChange={handleInput}
+        />
+        <FormInputStyle
+          fluid
+          label='LinkendIn'
+          placeholder='LinkendIn'
+          name='linkedin_url'
+          value={values.linkedin_url}
           onChange={handleInput}
         />
       </Form.Group>
@@ -119,34 +148,6 @@ const ModifyComponent = ({ gig }: any) => {
           placeholder='Experience'
           name='experience'
           value={values.experience}
-          onChange={handleInput}
-        />
-      </Form.Group>
-      <Form.Group widths='equal'>
-        <Form.Input
-          fluid
-          label='Year Of Experience'
-          placeholder='Year Of Experience'
-          name='yoe'
-          value={values.yoe}
-          onChange={handleInput}
-        />
-      </Form.Group>
-      <Form.Group widths='equal'>
-        <Form.Input
-          fluid
-          label='Github'
-          placeholder='Github'
-          name='github_url'
-          value={values.github_url}
-          onChange={handleInput}
-        />
-        <Form.Input
-          fluid
-          label='LinkendIn'
-          placeholder='LinkendIn'
-          name='linkedin_url'
-          value={values.linkedin_url}
           onChange={handleInput}
         />
       </Form.Group>

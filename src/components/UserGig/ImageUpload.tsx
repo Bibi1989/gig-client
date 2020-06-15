@@ -47,7 +47,10 @@ const ImageUpload = ({ gig }: any) => {
           placeholder='Upload image'
           onChange={handleFile}
         />
-        <Button type='submit' style={{ marginTop: "1em" }}>
+        <Button
+          type='submit'
+          style={{ marginTop: "1em", background: "#00B5AD", color: "white" }}
+        >
           Upload
         </Button>
       </Form>
