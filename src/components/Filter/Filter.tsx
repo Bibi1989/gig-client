@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { Form, Select } from "semantic-ui-react";
 import { IForm3 } from "../../utils/IForm";
@@ -37,21 +37,15 @@ const profs = [
   { value: "senior", text: "Senior Level" },
 ];
 
-const stacks = [
-  { value: "frontend", text: "Front End" },
-  { value: "backend", text: "Back End" },
-  { value: "fullstack", text: "Full Stack" },
-];
-
 const Filter = () => {
   const { searchGigLocation, searchGigProficiency, searchGigTech } = useContext(
     GigContext
   );
-  const [technologies, setTech] = useState<string>("");
+  const setTech = useState<string>("");
   const [location, setLocation] = useState<string>("");
-  const [prof, setProf] = useState<string>("");
+  const setProf = useState<string>("");
   const handleInputTech = ({ target: { textContent } }: IForm3) => {
-    setTech(textContent.toLowerCase());
+    setTech[1](textContent.toLowerCase());
     searchGigTech(textContent);
   };
   const handleInputLocation = ({ target: { textContent } }: IForm3) => {
@@ -60,7 +54,7 @@ const Filter = () => {
   };
   const handleInputProf = ({ target: { textContent } }: IForm3) => {
     searchGigProficiency(textContent);
-    setProf(textContent.toLowerCase());
+    setProf[1](textContent.toLowerCase());
   };
 
   return (

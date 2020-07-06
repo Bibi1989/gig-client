@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
-import { FormGroup, Form, Button } from "react-bootstrap";
+import { FormGroup, Button } from "react-bootstrap";
 import { Icon } from "semantic-ui-react";
 import { GigContext } from "../../context/GigProvider";
 import { IForm } from "../../utils/IForm";
@@ -15,7 +15,7 @@ const Dashboard = () => {
   useEffect(() => {
     fetchGig();
 
-    console.log("Render");
+    // eslint-disable-next-line
   }, [search, setSearch]);
 
   const handleInput = ({ target: { value } }: IForm) => {

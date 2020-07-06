@@ -26,7 +26,7 @@ const AuthGigList = ({ gig }: any) => {
       </div>
       <Avatar width='70px'>
         {gig.profile_image ? (
-          <img src={gig.profile_image} />
+          <img src={gig.profile_image} alt='Profile' />
         ) : (
           // <>
           //   {gig.first_name[0].toUpperCase()}

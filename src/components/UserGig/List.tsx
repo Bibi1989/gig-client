@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
+import React, { useContext, useState } from "react";
 import { fullName } from "../../utils/fullName";
 import { Icon, Card, Accordion } from "semantic-ui-react";
 import { GigContext } from "../../context/GigProvider";
@@ -23,9 +22,7 @@ import {
 } from "../commons/style";
 
 const List = ({ gig }: any) => {
-  const { fetchProfileGig, currentGig, deleteGig, current } = useContext(
-    GigContext
-  );
+  const { currentGig, deleteGig, current } = useContext(GigContext);
 
   const [state, setState] = useState({ activeIndex: 1 });
 
@@ -57,7 +54,7 @@ const List = ({ gig }: any) => {
       </div>
       <Avatar width='70px'>
         {gig.profile_image ? (
-          <img src={gig.profile_image} />
+          <img src={gig.profile_image} alt='gigPic' />
         ) : (
           // <>
           //   {gig.first_name[0].toUpperCase()}

@@ -36,6 +36,8 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (invalid) setShow(true);
+
+    // eslint-disable-next-line
   }, [errors]);
 
   if (loading) {
@@ -72,27 +74,27 @@ const LoginForm = () => {
         </Alert>
       )}
       <Form onSubmit={onsubmit}>
-        <Form.Group widths='equal'>
-          <Form.Input
-            fluid
-            label='Email Address'
-            placeholder='Email Address'
-            name='email'
-            onChange={handleInput}
-            value={values.email}
-            error={email ? { content: email } : false}
-          />
-          <Form.Input
-            fluid
-            label='Password'
-            placeholder='Password'
-            name='password'
-            value={values.password}
-            onChange={handleInput}
-            error={password ? { content: password } : false}
-          />
-        </Form.Group>
-        <Button type='submit'>Login</Button>
+        <Form.Input
+          fluid
+          label='Email Address'
+          placeholder='Email Address'
+          name='email'
+          onChange={handleInput}
+          value={values.email}
+          error={email ? { content: email } : false}
+        />
+        <Form.Input
+          fluid
+          label='Password'
+          placeholder='Password'
+          name='password'
+          value={values.password}
+          onChange={handleInput}
+          error={password ? { content: password } : false}
+        />
+        <Button type='submit' style={{ display: "block", margin: "auto" }}>
+          Login
+        </Button>
       </Form>
     </FormParent>
   );

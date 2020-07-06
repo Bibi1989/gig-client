@@ -5,9 +5,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { GigProvider } from "./context/GigProvider";
 import Nav from "./components/Nav/Nav";
 import Dash from "./pages/Dash";
-import GigComponent from "./pages/Gig";
-import AddGigPage from "./pages/AddGig";
-import Filter from "./components/Filter/Filter";
 import LoginComponent from "./pages/LoginComponent";
 import RegisterComponent from "./pages/RegisterComponent";
 

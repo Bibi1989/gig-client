@@ -1,17 +1,17 @@
 import React, { useContext, useEffect } from "react";
 import { Navbar, Nav, Spinner } from "react-bootstrap";
 import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Avatar } from "../commons/style";
 import { GigContext } from "../../context/GigProvider";
 
 const Navs = () => {
   const { fetchProfileGig, gig } = useContext(GigContext);
-  const history = useHistory();
-  console.log(gig);
 
   useEffect(() => {
     fetchProfileGig();
+
+    // eslint-disable-next-line
   }, []);
 
   function fullName(gig: any): string {
@@ -37,7 +37,7 @@ const Navs = () => {
                 {gig[0] !== undefined && gig[0].profile_image !== null ? (
                   <img
                     src={gig[0] !== undefined && gig[0].profile_image}
-                    alt='person image'
+                    alt='person'
                   />
                 ) : (
                   // <div>
@@ -60,7 +60,7 @@ const Navs = () => {
           className='links'
           to={sessionStorage.getItem("gig_token") ? "/" : "/home"}
         >
-          <Orange>Find</Orange> <Teal>Gig</Teal>
+          <Orange>Hire</Orange> <Teal>Me</Teal>
         </LinkStyle>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />

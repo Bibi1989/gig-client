@@ -64,6 +64,8 @@ const SelectModification = ({ gig }: any) => {
     if (skillError) {
       setShow(true);
     }
+
+    // eslint-disable-next-line
   }, []);
 
   const onsubmit = (e: React.FormEvent) => {

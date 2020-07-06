@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Form, TextArea, Select } from "semantic-ui-react";
 import { GigContext } from "../../context/GigProvider";
 import { Button, Accordion, Card } from "react-bootstrap";
-import { IForm, IForm2, IForm3 } from "../../utils/IForm";
+import { IForm2, IForm3 } from "../../utils/IForm";
 import { states } from "../../utils/states";
 
 const newstate = states.map((state) => {

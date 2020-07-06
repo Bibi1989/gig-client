@@ -33,6 +33,8 @@ const RegisterForm = () => {
 
   useEffect(() => {
     if (invalid) setShow(true);
+
+    // eslint-disable-next-line
   }, [errors]);
 
   if (loading) {

@@ -40,6 +40,8 @@ const ModifyComponent = ({ gig }: any) => {
       profile,
       experience,
     });
+
+    // eslint-disable-next-line
   }, [gig]);
   const handleInput = ({ target: { name, value } }: any) => {
     setValues({

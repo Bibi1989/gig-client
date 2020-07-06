@@ -8894,6 +8894,11 @@ react-dom@^16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
+react-driftjs@^1.1.11:
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/react-driftjs/-/react-driftjs-1.1.11.tgz#f6b6e814cbec29bd478e28f9695cb0ca3685d2d5"
+  integrity sha512-KBKWlMFmgjKiq6icyNPVh6usij+TSWCPCdLwAhs1sd87tvV12DHjbAlGVDLftS2NCjEajEArQBUicMqJqkI9Yw==
+
 react-error-overlay@^6.0.7:
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"

@@ -13,6 +13,8 @@ const UserGig = () => {
 
   useEffect(() => {
     fetchProfileGig();
+
+    // eslint-disable-next-line
   }, [update, delete_gig]);
 
   if (loading) {

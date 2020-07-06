@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import GigList from "./GigList";
-// import { contents } from "../../utils/data";
 import { GigContext } from "../../context/GigProvider";
 import { Spinner } from "react-bootstrap";
 import AuthGigList from "./AuthGigList";
@@ -11,6 +10,8 @@ const Gig = () => {
   const { fetchGig, gigs, loading } = useContext(GigContext);
   useEffect(() => {
     fetchGig();
+
+    // eslint-disable-next-line
   }, [divRef]);
   return (
     <Container>

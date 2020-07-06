@@ -55,7 +55,7 @@ const ImageUpload = ({ gig }: any) => {
         </Button>
       </Form>
       <ShowImage>
-        <img src={file && file} />
+        <img src={file && file} alt='upload' />
       </ShowImage>
     </ImageWrapper>
   );
