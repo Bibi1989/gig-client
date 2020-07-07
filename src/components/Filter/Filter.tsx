@@ -59,7 +59,7 @@ const Filter = () => {
 
   return (
     <Container>
-      <H1>Filter Gigs</H1>
+      <H1>Filter Devs</H1>
       <FormStyle>
         <Form.Field
           control={Select}

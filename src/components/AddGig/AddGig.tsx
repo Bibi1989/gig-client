@@ -48,6 +48,7 @@ const AddGig = () => {
     password: "",
     location: "",
     yoe: "",
+    portfolio_url: "",
     github_url: "",
     linkedin_url: "",
     profile: "",
@@ -90,6 +91,7 @@ const AddGig = () => {
       password: "",
       location: "",
       yoe: "",
+      portfolio_url: "",
       github_url: "",
       linkedin_url: "",
       profile: "",
@@ -241,6 +243,14 @@ const AddGig = () => {
                     name='linlin_url'
                     onChange={handleInput}
                     value={values.linkedin_url}
+                  />
+                  <Form.Input
+                    fluid
+                    label='Portfolio'
+                    placeholder='Portfolio'
+                    name='portfolio_url'
+                    onChange={handleInput}
+                    value={values.portfolio_url}
                   />
                 </Form.Group>
                 <Button type='submit' variant='info'>

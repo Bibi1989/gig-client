@@ -19,7 +19,7 @@ const Dashboard = () => {
   }, [search, setSearch]);
 
   const handleInput = ({ target: { value } }: IForm) => {
-    searchGigLocation(value);
+    searchGigLocation(value.toLowerCase());
   };
 
   const onsubmit = (e: any) => {
@@ -30,10 +30,11 @@ const Dashboard = () => {
       <Container>
         <LandingStyle>
           <FormStyle onSubmit={onsubmit}>
+            <H1>Find A DEV</H1>
             <FormGroupStyle>
               <Input
                 type='search'
-                placeholder='Search for gig base on location'
+                placeholder='Search for dev base a location'
                 onChange={handleInput}
               />
               <IconStyle name='search' color='orange' />
@@ -88,6 +89,14 @@ const LandingStyle = styled.div`
   background-position: center;
   background-repeat: no-repeat;
 `;
+
+const H1 = styled.h1`
+  color: orangered;
+  text-align: center;
+  font-weight: 700;
+  padding-bottom: 1.5em;
+`;
+
 const FormGroupStyle = styled(FormGroup)`
   width: 60vw !important;
   position: relative;

@@ -99,6 +99,10 @@ export const ShowContacts = ({ gig }: any) => {
             {gig.email ? gig.email : "No Email Address"}
           </P>
           <P>
+            <Icon name='browser' /> Portfolio:{" "}
+            {gig.portfolio_url ? gig.portfolio_url : "No LinkedIn link"}
+          </P>
+          <P>
             <Icon name='browser' /> LinkedIn:{" "}
             {gig.linkedin_url ? gig.linkedin_url : "No LinkedIn link"}
           </P>

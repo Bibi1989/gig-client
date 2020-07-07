@@ -24,7 +24,7 @@ const Gig = () => {
         {gigs.length <= 0
           ? !loading && (
               <div>
-                <h1 style={{ textAlign: "center" }}>No Gig found!!!</h1>
+                <h1 style={{ textAlign: "center" }}>No Dev found!!!</h1>
               </div>
             )
           : gigs.map((array: any) => {
