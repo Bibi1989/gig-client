@@ -2,14 +2,13 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { Input, Form, Button } from "semantic-ui-react";
 import { GigContext } from "../../context/GigProvider";
-import axios from "axios";
 import dotenv from "dotenv";
 import { H1Style } from "../commons/style";
 
 dotenv.config();
 
-const upload_preset: any = process.env.REACT_APP_UPLOAD_PRESET;
-const cloud_base_name: any = process.env.REACT_APP_CLOUDINARY_BASE_URL;
+// const upload_preset: any = process.env.REACT_APP_UPLOAD_PRESET;
+// const cloud_base_name: any = process.env.REACT_APP_CLOUDINARY_BASE_URL;
 
 const ImageUpload = ({ gig }: any) => {
   const { updateImage } = useContext(GigContext);
