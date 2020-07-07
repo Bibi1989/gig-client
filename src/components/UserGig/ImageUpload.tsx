@@ -12,30 +12,30 @@ const upload_preset: any = process.env.REACT_APP_UPLOAD_PRESET;
 const cloud_base_name: any = process.env.REACT_APP_CLOUDINARY_BASE_URL;
 
 const ImageUpload = ({ gig }: any) => {
-  const { updateGig } = useContext(GigContext);
+  const { updateImage } = useContext(GigContext);
   const [file, setFile] = useState();
 
   const handleFile = ({ target: { files } }: any) => {
     setFile(files[0]);
-    console.log(files[0]);
     const data: any = new FormData();
     data.append("file", files[0]);
-    data.append("upload_preset", upload_preset);
-    axios
-      .post(cloud_base_name, data, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      })
-      .then((res) => {
-        setFile(res.data.secure_url);
-      })
-      .catch((err) => console.log(err.response));
+    setFile(data);
+    // data.append("upload_preset", upload_preset);
+    // axios
+    //   .post(cloud_base_name, data, {
+    //     headers: {
+    //       "Content-Type": "application/x-www-form-urlencoded",
+    //     },
+    //   })
+    //   .then((res) => {
+    //     setFile(res.data.secure_url);
+    //   })
+    //   .catch((err) => console.log(err.response));
   };
   const onsubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    updateGig(gig.id, { ...gig, profile_image: file });
+    updateImage(gig.id, file);
   };
   return (
     <ImageWrapper>
@@ -46,6 +46,7 @@ const ImageUpload = ({ gig }: any) => {
           type='file'
           placeholder='Upload image'
           onChange={handleFile}
+          accept='imgae/*'
         />
         <Button
           type='submit'
@@ -54,9 +55,7 @@ const ImageUpload = ({ gig }: any) => {
           Upload
         </Button>
       </Form>
-      <ShowImage>
-        <img src={file && file} alt='upload' />
-      </ShowImage>
+      <ShowImage>{/* <img src={file && file} alt='upload' /> */}</ShowImage>
     </ImageWrapper>
   );
 };

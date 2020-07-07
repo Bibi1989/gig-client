@@ -192,10 +192,15 @@ export const GigProvider = ({ children }: any) => {
       console.log(error.response);
     }
   };
-  const updateImage = async (id: number, file: any, gig: any) => {
+  const updateImage = async (id: number, file: any) => {
     try {
       dispatch({ type: LOADING, payload: true });
-      const response = await axios.patch(`${URL}/upload/${id}`, { file, gig });
+      const response = await axios.patch(`${URL}/upload/${id}`, file, {
+        headers: {
+          "content-type": "multipart/form-data",
+          auth: sessionStorage.getItem("gig_token"),
+        },
+      });
       dispatch({ type: LOADING, payload: false });
       dispatch({ type: UPDATE_GIG, payload: response.data.data });
     } catch (error) {
@@ -203,6 +208,17 @@ export const GigProvider = ({ children }: any) => {
       console.log(error.response);
     }
   };
+  // const updateImage = async (id: number, file: any, gig: any) => {
+  //   try {
+  //     dispatch({ type: LOADING, payload: true });
+  //     const response = await axios.patch(`${URL}/upload/${id}`, { file, gig });
+  //     dispatch({ type: LOADING, payload: false });
+  //     dispatch({ type: UPDATE_GIG, payload: response.data.data });
+  //   } catch (error) {
+  //     dispatch({ type: LOADING, payload: false });
+  //     console.log(error.response);
+  //   }
+  // };
   const deleteGig = async (id: number) => {
     try {
       dispatch({ type: LOADING, payload: true });
