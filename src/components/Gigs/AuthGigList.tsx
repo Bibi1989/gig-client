@@ -110,6 +110,10 @@ export const ShowContacts = ({ gig }: any) => {
             <Icon name='browser' /> Github:{" "}
             {gig.github_url ? gig.github_url : "No Github link"}
           </P>
+          <P>
+            <Icon name='browser' /> Proficiency Level:{" "}
+            {gig.proficiency ? gig.proficiency : "No Github link"}
+          </P>
         </div>
       </Accordion.Content>
     </Accordion>

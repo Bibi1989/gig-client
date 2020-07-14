@@ -44,6 +44,8 @@ const GigList = ({ gig }: any) => {
           <Li key={index}>{technology}</Li>
         ))}
       </Ul>
+      <H2>Location</H2>
+      <Ul>{<Li>{gig.location ? gig.location : "No Location"}</Li>}</Ul>
     </>
   );
   const footer = (

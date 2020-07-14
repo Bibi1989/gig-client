@@ -1,18 +1,20 @@
 import React, { createContext, useReducer, useState } from "react";
 import axios from "axios";
+import { reducer } from "./gigReducer";
+import {
+  FETCH_GIGS,
+  FETCH_PROFILE,
+  CURRENT_GIG,
+  UPDATE_GIG,
+  DELETE_GIG,
+  ADD_GIGS,
+  SEARCH_GIG_LOCATION,
+  SEARCH_GIG_PROF,
+  SEARCH_GIG_TECH,
+  LOADING,
+} from "./gigTypes";
 
 export const GigContext = createContext<any | null>(null);
-
-const FETCH_GIGS = "FETCH_GIGS";
-const FETCH_PROFILE = "FETCH_PROFILE";
-const ADD_GIGS = "ADD_GIGS";
-const CURRENT_GIG = "CURRENT_GIG";
-const UPDATE_GIG = "UPDATE_GIG";
-const DELETE_GIG = "DELETE_GIG";
-const SEARCH_GIG_LOCATION = "SEARCH_GIG_LOCATION";
-const SEARCH_GIG_PROF = "SEARCH_GIG_PROF";
-const SEARCH_GIG_TECH = "SEARCH_GIG_TECH";
-const LOADING = "LOADING";
 
 const initialState = {
   gigs: [],
@@ -21,78 +23,6 @@ const initialState = {
   update: {},
   delete_gig: {},
   loading: false,
-};
-
-interface IAction {
-  type: string;
-  payload: any;
-}
-
-interface IState {
-  gigs: any;
-  gig: any;
-  current: any;
-  update: any;
-  delete_gig: any;
-  loading: boolean;
-}
-
-const reducer = (state: IState, action: IAction) => {
-  switch (action.type) {
-    case FETCH_GIGS:
-      return {
-        ...state,
-        gigs: [...action.payload],
-      };
-    case FETCH_PROFILE:
-      return {
-        ...state,
-        gig: [...action.payload],
-      };
-    case CURRENT_GIG:
-      return {
-        ...state,
-        current: { ...action.payload },
-      };
-    case UPDATE_GIG:
-      return {
-        ...state,
-        update: { ...action.payload },
-      };
-    case DELETE_GIG:
-      return {
-        ...state,
-        delete_gig: { ...action.payload },
-      };
-    case SEARCH_GIG_PROF:
-      return {
-        ...state,
-        gigs: [...action.payload],
-      };
-    case ADD_GIGS:
-      return {
-        ...state,
-        gigs: [...state.gigs, action.payload],
-      };
-    case SEARCH_GIG_LOCATION:
-      return {
-        ...state,
-        gigs: [...action.payload],
-      };
-    case SEARCH_GIG_TECH:
-      return {
-        ...state,
-        gigs: [...action.payload],
-      };
-    case LOADING:
-      return {
-        ...state,
-        loading: action.payload,
-      };
-
-    default:
-      return state;
-  }
 };
 
 const URL = "https://gig-api.herokuapp.com/api/v1/gig";
@@ -112,7 +42,9 @@ export const GigProvider = ({ children }: any) => {
   const searchGigLocation = async (text: string) => {
     try {
       dispatch({ type: LOADING, payload: true });
-      const response = await axios.get(`${URL}/search?location=${text}`);
+      const response = await axios.get(
+        `${URL}/search?location=${text.toLowerCase()}`
+      );
       dispatch({ type: LOADING, payload: false });
       dispatch({ type: SEARCH_GIG_LOCATION, payload: response.data.data });
     } catch (error) {
@@ -208,17 +140,6 @@ export const GigProvider = ({ children }: any) => {
       console.log(error.response);
     }
   };
-  // const updateImage = async (id: number, file: any, gig: any) => {
-  //   try {
-  //     dispatch({ type: LOADING, payload: true });
-  //     const response = await axios.patch(`${URL}/upload/${id}`, { file, gig });
-  //     dispatch({ type: LOADING, payload: false });
-  //     dispatch({ type: UPDATE_GIG, payload: response.data.data });
-  //   } catch (error) {
-  //     dispatch({ type: LOADING, payload: false });
-  //     console.log(error.response);
-  //   }
-  // };
   const deleteGig = async (id: number) => {
     try {
       dispatch({ type: LOADING, payload: true });

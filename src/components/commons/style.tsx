@@ -13,6 +13,7 @@ export const Flex = styled.div`
 `;
 export const H2 = styled.h2`
   color: #555555;
+  text-transform: uppercase;
 `;
 export const P = styled.p`
   color: #888;
@@ -22,6 +23,7 @@ export const Ul = styled.ul`
 `;
 export const Li = styled.li`
   color: #888;
+  text-transform: capitalize;
 `;
 export const FlexFooter = styled.div`
   display: flex;
